@@ -1,0 +1,233 @@
+<!--
+  👋 Hello! This is an ml5.js example made and shared with ❤️.
+  Learn more about the ml5.js project: https://ml5js.org/
+  ml5.js license and Code of Conduct: https://github.com/ml5js/ml5-next-gen/blob/main/LICENSE.md
+
+  This example demonstrates loading a pre-trained model with ml5.neuralNetwork.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Climbing Bodies</title>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script> -->
+    <!-- <script src="https://unpkg.com/ml5@1/dist/ml5.js"></script> -->
+    <script src="lib/p5.min.js"></script>
+    <script src="lib/p5.sound.min.js"></script>
+    <script src="lib/ml5.js"></script>
+    <script src="article.js"></script>
+    <!-- <script src="https://opentype.js.org/dist/opentype.js"></script> -->
+    
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+  </head>
+
+
+  <script >
+    let bk=0
+
+
+//     let htmlContent1 = bc[bk].lines.join('<br>');
+//       let  htmlContent2 = bc[bk].footnotes.join('<br>');
+
+
+// document.getElementsByClassName("text-content")[0].innerHTML = htmlContent1;
+// document.getElementsByClassName("text-footnote")[0].innerHTML = htmlContent2;
+    function uptxt(){
+
+
+     if(bk>0) bk--
+      console.log(bk)
+
+      const htmlContent1 = bc[bk].lines.join('<br>');
+      const htmlContent2 = bc[bk].footnotes.join('<br>');
+
+
+document.getElementsByClassName("text-content")[0].innerHTML = htmlContent1;
+document.getElementsByClassName("text-footnote")[0].innerHTML = htmlContent2;
+
+
+    }
+    function downtxt(){
+
+
+      if(bk<bc.length-1) bk++
+
+
+      console.log(bk)
+      const htmlContent1 = bc[bk].lines.join('<br>');
+      const htmlContent2 = bc[bk].footnotes.join('<br>');
+
+
+document.getElementsByClassName("text-content")[0].innerHTML = htmlContent1;
+document.getElementsByClassName("text-footnote")[0].innerHTML = htmlContent2;
+
+
+
+    }
+  </script>
+  <body>
+    <div class="head">
+      <h1 id="title">CLIMBING BODIES <br>
+        AS PRODUCER <br>
+        AND PRODUCED</h1>
+      <p id="credit">Text from:<br><br>
+        Jillian M Rickly, The (re)production of climbing space, <br>
+        Cultural Geographies , January 2017, Vol. 24, No. 1 (January 2017), pp. 69-88<br>
+        Sage Publications, Ltd. <a href="https://www.jstor.org/stable/10.2307/26168793">See Source.</a>
+      </p>
+    </div>
+    <div id="container">
+      <div id="graphic-container">
+        <main id="p5-content"></main>
+        <div id="visualization">
+          <div class="vis-section">
+            <p class="tag">Arms</p>
+            <div class="vis-item">
+              <div class="vis-capture" id="left-arm-capture">
+                <!-- <img src="assets/image/1.jpg" alt=""> -->
+              </div>
+              <div class="vis-attribute">
+                <div class="attribute-item">
+                  <p>Left arm</p>
+                  <div class="attribute-bar">
+                    <div class="slide-container" style="border-right: solid 1px var(--border-color);">
+                      <div class="slide-background" style="justify-content: flex-end;">
+                        <div class="slide-bar" id="left-arm"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="attribute-item">
+                  <p>Left Stroke</p>
+                  <div class="text-sample" id="sample-leftStroke">
+                    <p>A</p>
+                  </div>
+                </div>
+                <div class="attribute-item">
+                  <label for="leftStroke">Enable</label>
+                  <input type="checkbox" id="checkbox-leftStroke" name="leftStroke" checked >
+                </div>
+              </div>
+            </div>
+            <div class="vis-item">
+              <div class="vis-capture" id="right-arm-capture">
+                <!-- <img src="assets/image/1.jpg" alt=""> -->
+              </div>
+              <div class="vis-attribute">
+                <div class="attribute-item">
+                  <p>Right arm</p>
+                  <div class="attribute-bar">
+                    <div class="slide-container" style="border-left: solid 1px var(--border-color); margin-left: 50%">
+                      <div class="slide-background" style="justify-content: flex-start;">
+                        <div class="slide-bar" id="right-arm"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="attribute-item">
+                  <p>Right Stroke</p>
+                  <div class="text-sample" id="sample-rightStroke">
+                    <p>A</p>
+                  </div>
+                </div>
+                <div class="attribute-item">
+                  <label for="rightStroke">Enable</label>
+                  <input type="checkbox" id="checkbox-rightStroke" name="rightStroke" checked >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="vis-section">
+            <p class="tag">Torso</p>
+            <div class="vis-item">
+              <div class="vis-capture" id="torso-capture">
+                <!-- <img src="assets/image/1.jpg" alt=""> -->
+              </div>
+              <div class="vis-attribute" style="flex-direction: column;">
+                <div style="display: flex; flex-direction: row;">
+                  <div class="attribute-item" style="width: 45%; margin-right: 5px;">
+                    <p>Torso slant</p>
+                    <div class="attribute-bar" style="height: 65px; padding: 0;">
+                      <div class="slide-container" style="width: 100%; padding: 0;">
+                        <div class="slant-background">
+                          <div class="slant-bar" id="torso-bar"></div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div class="attribute-item" style="width: 45%; ">
+                    <p>Core slant</p>
+                    <div class="text-sample" id="sample-slant" style="height: 65px; ">
+                      <p>A</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="attribute-item">
+                  <label for="slant">Enable</label>
+                  <input type="checkbox" id="checkbox-slant" name="slant" checked >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="text-container">
+
+        <div id="button-container">
+          <button id="btn-prev"  onclick="uptxt()">PREV</button>
+          <button id="btn-next" onclick="downtxt()">NEXT</button>
+        </div>
+        
+        <p class="text-content">
+          <!-- <span class="v">A</span>s s<span class="v">u</span>ch, <br>
+          Le<span class="v">f</span>ebvre’s dis<span class="v">c</span>ussion <br>
+          of t<span class="v">h</span>e mat<span class="v">e</span>ria<span class="v">l</span> <br>
+          bod<span class="v">y</span> is applic<span class="v">a</span>ble <br>
+          in thi<span class="v">s</span> regard. The c<span class="v">l</span>imbing <br>
+          body is n<span class="v">o</span>t derived <br>
+          fro<span class="v">m</span> the fa<span class="v">c</span>t <br>
+          that it <span class="v">h</span>as the <br>
+          abili<span class="v">ty</span> to climb, <br>
+          but f<span class="v">r</span>om its enactment – <br>
+          the s<span class="v">p</span>atia<span class="v">l</span> practice <br>
+          of clim<span class="v">bi</span>ng, the body’s <br>
+          mo<span class="v">v</span>emen<span class="v">t</span> on, <br>
+          across, and a<span class="v">g</span>ainst rock. <br>
+
+          Ga<span class="v">z</span>ing upon a ro<span class="v">ck</span> <br>
+          face, routes are s<span class="v">ee</span>n <br>
+          th<span class="v">r</span>ough trained eyes as <br>
+          <span class="v">p</span>erc<span class="v">e</span>ived space <br>
+          and are e<span class="v">n</span>acted through <br>
+          the performance of climbing.<span class="footnote-no">40</span> <br> -->
+          
+        </p>
+        <p class="text-footnote">
+          <!-- <span class="footnote-no">41</span>  Rossiter, ‘On Humans, Nature, and Other Nonhumans’.<br>
+          <span class="footnote-no">42</span>  Rossiter, ‘On Humans, Nature, and Other Nonhumans’, p. 298; See also Barratt, ‘Vertical Worlds’; Barratt, ‘“My Magic Cam”’; Ness, ‘Bouldering in Yosemite’. -->
+        </p>
+        
+      </div>
+    </div>
+    <script src="sketch.js"></script>
+
+    <script>
+         let htmlContent1 = bc[0].lines.join('<br>');
+      let  htmlContent2 = bc[0].footnotes.join('<br>');
+
+
+document.getElementsByClassName("text-content")[0].innerHTML = htmlContent1;
+document.getElementsByClassName("text-footnote")[0].innerHTML = htmlContent2;
+    </script>
+
+  </body>
+</html>
